@@ -4,6 +4,10 @@ class PostsController < ApplicationController
         @post = Post.new
     end
     
+    def index
+      @posts = Post.all.order("created_at DESC")
+    end
+    
     def create
       @post = current_user.posts.create(post_params)
       if @post.valid?
@@ -13,7 +17,7 @@ class PostsController < ApplicationController
       end
     end
 
-private
+    private
 
     def post_params
         params.require(:post).permit(:user_id, :photo, :description)
