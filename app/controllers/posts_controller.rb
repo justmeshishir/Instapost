@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
+    bofore_action :is_owner?, only: [:edit, :update]
     def new
         @post = Post.new
     end
@@ -34,5 +35,9 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:user_id, :photo, :description)
+    end
+    
+    def is_owner?
+      redirect_to root_path if Post.find(params[:id].user != current_user)
     end
 end
