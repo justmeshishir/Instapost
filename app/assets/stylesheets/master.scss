@@ -111,6 +111,16 @@ a:hover
   width: 150px;
 }
 
+.post_like {
+  .fa {
+    font-size: 20px;
+  }
+  
+  .fa-heart{
+    color: red;
+  }
+}
+
 .prof_pic_small {
   border-radius: 50%;
   height: 28px;

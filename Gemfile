@@ -54,3 +54,6 @@ gem 'simple_form'
 
 #for likes
 gem 'acts_as_votable', '~> 0.10.0'
+
+#for hearts in likes
+gem 'font-awesome-sass', '~> 4.6.2'
