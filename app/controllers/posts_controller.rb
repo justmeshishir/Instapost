@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     end
     
     def index
-      @posts = Post.all.order("created_at DESC")
+      @posts = Post.all.order("created_at DESC").includes(:comments, :user)
     end
     
     def create

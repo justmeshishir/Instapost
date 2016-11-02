@@ -7,7 +7,10 @@
       <%= link_to post.user.name, user_path(post.user_id) %>
       <span class="timestamp pull-right"><%= distance_of_time_in_words(DateTime.now, post.created_at) %> ago</span>
     </div>
-
+    <% if post.user == current_user %>
+        <%= link_to 'Edit Post', edit_post_path(post.id) %>
+        <%= link_to 'Delete Post', post_path(post.id), method: :delete, data: {confirm: 'Are you sure?'} %><br /><br />
+    <% end %>
     <%= image_tag post.photo, class: 'photo' %>
     
     <div class="post_body">
@@ -20,7 +23,7 @@
 
       <% post.comments.each do |comment| %>
 
-        <%= link_to comment.user.name,  user_path(comment.user_id) %> <%= comment.text %>
+        <%= link_to comment.user.name,  user_path(comment.user_id) %> <%= comment.text %><br />
 
       <% end %>
       <hr>
