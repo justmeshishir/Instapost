@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031132858) do
+ActiveRecord::Schema.define(version: 20161104180146) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20161031132858) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id", "post_id"], name: "index_comments_on_user_id_and_post_id"
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "following_id", null: false
+    t.integer  "follower_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id"
+  add_index "follows", ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
+  add_index "follows", ["following_id"], name: "index_follows_on_following_id"
 
   create_table "posts", force: :cascade do |t|
     t.string   "photo"
@@ -49,13 +60,8 @@ ActiveRecord::Schema.define(version: 20161031132858) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "photo"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

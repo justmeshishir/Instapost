@@ -10,8 +10,17 @@
             <h1 class = "username"><%= @user.name %></h1>
           </div>
           <div class="col-xs-6">
-            <%= link_to 'EDIT PROFILE', edit_user_registration_path(@user), class: 'user_edit_button btn btn-default' if user_signed_in? && @user == current_user %>
+            <% if user_signed_in? && @user == current_user %>
+              <%= link_to 'EDIT PROFILE', edit_user_registration_path(@user), class: 'user_edit_button btn btn-default' %>
+            <% else %>
+              <% if current_user_is_following(current_user, @user) %>
+                <%= link_to 'Following', follow_user_path(@user), remote: true, class: 'btn unfollow-button', id: 'unfollow-button', method: :post %>
+              <% else %>
+                <%= link_to 'Follow', unfollow_user_path(@user), remote: true, class: 'btn follow-button', id: 'follow-button', method: :post %>
+              <% end %>
+            <% end %>          
           </div>
+          </span>
         </div>  
       </div>
       <span class="count"><%= pluralize(@user.posts.count, 'post') %></span>

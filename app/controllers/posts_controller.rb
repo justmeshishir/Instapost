@@ -10,11 +10,13 @@ class PostsController < ApplicationController
     end
     
     def index
-      @posts = Post.all.order("created_at DESC").includes(:user, comments: :user)
+      @posts = Post.all.order("created_at DESC").includes(:user, comments: :user) unless user_signed_in?
+      @posts = Post.of_followed_users(current_user.following).order("created_at DESC").includes(:user, comments: :user) if user_signed_in?
     end
     
     def create
       @post = current_user.posts.create(post_params)
+      return "Sorry" if @post.extension_white_list == false
       if @post.valid?
         redirect_to root_path
       else
@@ -50,5 +52,9 @@ class PostsController < ApplicationController
     
     def is_owner?
       redirect_to root_path if Post.find(params[:id]).user != current_user
+    end
+    
+    def extension_white_list
+      %w(jpg jpeg gif png)
     end
 end

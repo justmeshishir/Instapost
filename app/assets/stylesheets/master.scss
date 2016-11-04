@@ -70,6 +70,8 @@ a:hover
 .timestamp {
   color: #a5a7aa;
   font-weight: 500;
+  margin-right: 10px;
+  margin-top: 7px;
 }
 
 .container
@@ -120,6 +122,8 @@ a:hover
 .post_like {
   .fa {
     font-size: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
   }
   
   .fa-heart{
@@ -131,4 +135,55 @@ a:hover
   border-radius: 50%;
   height: 28px;
   width: 28px;
+}
+
+#comment_text
+{
+  width: 80%;
+  resize: none;
+  border-style: none; 
+  border-color: Transparent; 
+  overflow: auto;
+  float: left;
+}
+.btn-info
+{
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.dropdown-toggle
+{
+  border: none;
+  height: auto;
+}
+
+.dropdown-toggle:hover, .dropdown-toggle:focus
+{
+  background-color: white;
+}
+
+.follow-button {
+  text-transform: uppercase;
+  border-color: #4090db;
+  color: #4090db;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #2D6396;
+    color: #2D6396;
+  }
+}
+
+.unfollow-button {
+  text-transform: uppercase;
+  border-color: #66bd2b;
+  background-color: #66bd2b;
+  color: white;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #47821F;
+    background-color: #47821F;
+    color: white;
+  }
 }
